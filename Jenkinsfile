@@ -26,7 +26,15 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                bat 'java -jar target/*.jar'
+                script {
+
+                    def jarFile = bat(script: 'for %i in (target\\*.jar) do @echo %i', returnStdout: true).trim()
+                    if (jarFile) {
+                        bat "java -jar ${jarFile}"
+                    } else {
+                        error("No JAR file found in the target directory!")
+                    }
+                }
             }
         }
     }
