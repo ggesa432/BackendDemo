@@ -26,18 +26,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                script {
-                    def jarFile = bat(script: 'for /r %i in (target\\*.jar) do @echo %i', returnStdout: true).trim()
-                    echo "Found JAR file: ${jarFile}"
-                    if (jarFile) {
-                        bat "java -jar ${jarFile}"
-                    } else {
-                        error("No JAR file found in the target directory!")
-                    }
-                }
+                bat 'java -jar target/backend-0.0.1-SNAPSHOT.jar'
             }
         }
-    }
+
     post {
         always {
             junit 'target/surefire-reports/*.xml'
