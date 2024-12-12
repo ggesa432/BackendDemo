@@ -11,12 +11,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat './mvnw clean package'
+                bat './mvnw.cmd clean package'
             }
         }
         stage('Test') {
             steps {
-                sh './mvnw test'
+                bat './mvnw.cmd test'
             }
         }
         stage('Package') {
@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'java -jar target/*.jar'
+                bat 'java -jar target/*.jar'
             }
         }
     }
