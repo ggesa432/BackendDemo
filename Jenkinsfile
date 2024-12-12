@@ -1,22 +1,22 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven_3.8.1' 
+        maven 'Maven_3.8.1'
     }
     stages {
         stage('Checkout Code') {
             steps {
-                checkout scm 
+                checkout scm
             }
         }
         stage('Build') {
             steps {
-                sh './mvnw clean package' 
+                sh './mvnw clean package'
             }
         }
         stage('Test') {
             steps {
-                sh './mvnw test' 
+                sh './mvnw test'
             }
         }
         stage('Package') {
@@ -26,13 +26,13 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'java -jar target/*.jar' 
+                sh 'java -jar target/*.jar'
             }
         }
     }
     post {
         always {
-            junit 'target/surefire-reports/*.xml' 
+            junit 'target/surefire-reports/*.xml'
         }
     }
 }
