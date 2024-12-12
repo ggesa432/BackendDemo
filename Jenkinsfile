@@ -26,7 +26,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                bat 'java -jar target/backend-0.0.1-SNAPSHOT.jar'
+                timeout(time: 5, unit: 'MINUTES') {
+                            bat 'start /b java -jar target/backend-0.0.1-SNAPSHOT.jar'
+                        }
             }
         }
     }
