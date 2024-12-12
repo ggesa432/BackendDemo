@@ -29,11 +29,10 @@ pipeline {
                 bat 'java -jar target/backend-0.0.1-SNAPSHOT.jar'
             }
         }
-
+    }
     post {
         always {
             junit 'target/surefire-reports/*.xml'
         }
     }
 }
-
